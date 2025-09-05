@@ -49,6 +49,10 @@ The system adaptively adjusts ride prices based on demand, supply, vehicle type,
 - **Visual Feedback**: Clear metrics and state information
 - **Responsive Design**: Works on desktop and mobile
 
+## 🚀 Live Demo
+👉 Try the app here: [Smart Dynamic Pricing App](https://smart-dynamic-pricing.streamlit.app/)
+
+
 ## 🚀 Quick Start
 
 ### Prerequisites
