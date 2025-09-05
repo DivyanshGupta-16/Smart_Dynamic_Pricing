@@ -203,22 +203,6 @@ final_price = base_price * multiplier
 - **pandas** ≥ 2.0 - Data manipulation and analysis
 - **numpy** ≥ 1.24 - Numerical computing
 
-## 🤝 Contributing
-
-We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 🙏 Acknowledgments
-
-- Built with ❤️ using Python, Streamlit, and Reinforcement Learning
-- Inspired by modern ride-sharing pricing strategies
-- Special thanks to the open-source community
-
 ---
 
 <div align="center">
