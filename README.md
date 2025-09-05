@@ -1,141 +1,235 @@
-# 🚖 Smart Dynamic Pricing (Hybrid ML + RL)
+# 🚖 Smart Dynamic Pricing System
 
-A **hybrid machine learning + reinforcement learning system** for simulating and predicting **dynamic ride pricing**.  
-The project combines **historical price estimation** (ML) with a **Q-learning agent** (RL) to adaptively adjust prices based on demand, supply, and customer loyalty.
+<div align="center">
 
----
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.33+-red.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## 📌 Features
-- **Base Price Estimation**
-  - Median-based estimator using historical rides (`base_price.py`).
-  - Falls back from tight duration window → duration bins → vehicle-type median → global median.
-- **Data Preprocessing**
-  - Missing value handling.
-  - Vehicle type encoding (`Economy → 0`, `Premium → 1`, `Luxury → 2`).
-  - State construction from riders, drivers, and loyalty (`preprocessing.py`).
-- **Feature Engineering**
-  - Buckets riders → `Low`, `Medium`, `High`, `Very High`.
-  - Buckets drivers → `Low`, `Medium`, `High`.
-  - Loyalty proxy from vehicle type (`Regular`, `Silver`, `Gold`) (`utils.py`).
-- **Reinforcement Learning**
-  - `DynamicPricingEnv` simulates rides as episodes.
-  - `QLearningAgent` learns the best price multiplier.
-  - Multipliers: `[0.8×, 1.0×, 1.2×, 1.4×]` (`rl.py`).
-- **Interactive Streamlit App**
-  - Sidebar for user input (demand, supply, vehicle type, ride duration, base price).
-  - Option to auto-estimate base price.
-  - Shows RL-chosen multiplier and final price recommendation (`app.py`).
+**A hybrid Machine Learning + Reinforcement Learning system for dynamic ride pricing**
+
+*Combining historical price estimation with Q-learning for adaptive pricing strategies*
+
+[🚀 Quick Start](#-quick-start) • [📖 Documentation](#-documentation) • [🎯 Features](#-features) • [📊 Demo](#-demo)
+
+</div>
 
 ---
+
+## 🎯 Overview
+
+This project implements an intelligent dynamic pricing system for ride-sharing services that combines:
+
+- **📈 Machine Learning**: Historical price estimation using median-based algorithms
+- **🤖 Reinforcement Learning**: Q-learning agent for optimal price multiplier selection
+- **🎨 Interactive Interface**: Beautiful Streamlit web application for real-time predictions
+
+The system adaptively adjusts ride prices based on demand, supply, vehicle type, and customer loyalty to maximize revenue while maintaining competitive pricing.
+
+## ✨ Features
+
+### 🧠 **Intelligent Base Price Estimation**
+- **Hierarchical Fallback Strategy**: Duration window → Duration bins → Vehicle type → Global median
+- **Robust Handling**: Works with sparse data and missing historical records
+- **Multi-tier Support**: Economy, Premium, and Luxury vehicle pricing
+
+### 🎯 **Advanced Feature Engineering**
+- **Smart Bucketing**: Demand (Low/Medium/High/Very High) and Supply (Low/Medium/High) levels
+- **Loyalty Mapping**: Vehicle type → Customer tier (Regular/Silver/Gold)
+- **State Representation**: Optimized for reinforcement learning
+
+### 🤖 **Q-Learning Agent**
+- **Dynamic Environment**: Simulates real ride scenarios as episodes
+- **Price Multipliers**: [0.8×, 1.0×, 1.2×, 1.4×] for flexible pricing
+- **Reward Optimization**: Revenue maximization with cost consideration
+- **Epsilon-Greedy**: Balanced exploration vs exploitation
+
+### 🎨 **Interactive Web Application**
+- **Real-time Predictions**: Instant price recommendations
+- **Auto-estimation**: Optional historical price calculation
+- **Visual Feedback**: Clear metrics and state information
+- **Responsive Design**: Works on desktop and mobile
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.8 or higher
+- pip package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/dynamic-pricing-strategy.git
+   cd dynamic-pricing-strategy
+   ```
+
+2. **Create virtual environment**
+   ```bash
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
+   
+   # macOS/Linux
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the application**
+   ```bash
+   streamlit run app.py
+   ```
+
+5. **Open your browser** to `http://localhost:8501`
 
 ## 📂 Project Structure
-project-root/
-│── data/
-│ └── dynamic_pricing.csv # dataset
-│
-│── src/
-│ ├── base_price.py # base price estimation logic
-│ ├── preprocessing.py # data preprocessing + state builder
-│ ├── rl.py # environment + Q-learning agent
-│ ├── utils.py # bucket creation helpers
-│
-│── app.py # Streamlit app
-│── README.md # this file
-│── requirements.txt # dependencies
 
-yaml
-Copy code
+```
+dynamic-pricing-strategy/
+├── 📁 data/
+│   └── dynamic_pricing.csv          # Historical ride data
+├── 📁 src/
+│   ├── base_price.py               # Base price estimation logic
+│   ├── preprocessing.py            # Data preprocessing & state building
+│   ├── rl.py                       # RL environment & Q-learning agent
+│   └── utils.py                    # Feature engineering utilities
+├── 📁 assets/
+│   ├── base_price_1x.png          # Demo screenshots
+│   ├── base_price_1-2x.png
+│   ├── base_price_1-4x.png
+│   └── estimated_base_price.png
+├── app.py                          # Streamlit web application
+├── requirements.txt                # Python dependencies
+└── README.md                       # This file
+```
 
----
+## 📊 Demo
 
-## 🖼️ Demo
+### 🖼️ Application Screenshots
 
-Here are some screenshots of the Streamlit app in action:
+<table>
+<tr>
+<td align="center">
+<strong>Base Price Estimation</strong><br/>
+<img src="assets/base_price_1x.png" width="300"/>
+</td>
+<td align="center">
+<strong>High Demand Scenario</strong><br/>
+<img src="assets/base_price_1-2x.png" width="300"/>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>Supply-Demand Imbalance</strong><br/>
+<img src="assets/base_price_1-4x.png" width="300"/>
+</td>
+<td align="center">
+<strong>Duration-based Pricing</strong><br/>
+<img src="assets/estimated_base_price.png" width="300"/>
+</td>
+</tr>
+</table>
 
-### 🔹 Base Price
-![Home Screenshot](assets\base_price_1x.png)
+### 📈 Example Output
 
-### 🔹 More Demand
-![Sidebar Screenshot](assets\base_price_1-2x.png)
-
-### 🔹 More Demand with Less Supply
-![Prediction Screenshot](assets\base_price_1-4x.png)
-
-### 🔹 Estimated Increase in Base Price due to more ride duration
-![Details Screenshot](assets\estimated_base_price.png)
-
----
-
-## ⚙️ Installation
-
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/smart-dynamic-pricing.git
-   cd smart-dynamic-pricing
-Create a virtual environment and install dependencies:
-
-bash
-Copy code
-python -m venv venv
-source venv/bin/activate   # (Linux/Mac)
-venv\Scripts\activate      # (Windows)
-
-pip install -r requirements.txt
-Dependencies (requirements.txt):
-
-shell
-Copy code
-numpy>=1.21
-pandas>=1.3
-streamlit>=1.20
-🚀 Usage
-Place your dataset in data/dynamic_pricing.csv.
-The CSV should include at least:
-
-javascript
-Copy code
-Number_of_Riders, Number_of_Drivers, Vehicle_Type, Expected_Ride_Duration, Historical_Cost_of_Ride
-Run the Streamlit app:
-
-bash
-Copy code
-streamlit run app.py
-Use the sidebar to input:
-
-Riders, Drivers
-
-Vehicle type (Economy / Premium / Luxury)
-
-Expected ride duration
-
-Historical cost (optional if auto-estimation enabled)
-
-View results:
-
-Base price (ML estimator or manual input)
-
-RL-chosen multiplier
-
-Final recommended price
-
-🧠 Methodology
-ML (Supervised / Statistical):
-Estimate base ride price from historical rides.
-
-RL (Q-Learning):
-Agent trains on bucketed states → learns best multiplier to maximize reward (= revenue - base cost).
-
-Hybrid Prediction:
-Final price = Base Price × RL Multiplier.
-
-📊 Example Output
-lua
-Copy code
-Base Price (input): ₹120.00
+```
+Base Price (ML Estimate): ₹120.00
 RL Multiplier: 1.20×
----------------------------------
+State: ('High', 'Medium', 'Silver')
+─────────────────────────────────
 💰 Final Recommended Price: ₹144.00
-State = ('High', 'Medium', 'Silver')
+```
 
+## 🧠 Methodology
 
-✨ Built with Python, Streamlit, Numpy, Pandas, Reinforcement Learning
+### 🔄 **Hybrid Approach**
+
+1. **Machine Learning Component**
+   - Analyzes historical ride data
+   - Estimates base price using statistical methods
+   - Handles missing data and edge cases
+
+2. **Reinforcement Learning Component**
+   - Q-learning agent learns optimal pricing strategies
+   - Considers demand, supply, and customer loyalty
+   - Maximizes revenue through dynamic multiplier selection
+
+3. **Integration**
+   - Final Price = Base Price × RL Multiplier
+   - Real-time adaptation to market conditions
+
+### 📊 **Data Requirements**
+
+Your dataset should include these columns:
+```csv
+Number_of_Riders,Number_of_Drivers,Vehicle_Type,Expected_Ride_Duration,Historical_Cost_of_Ride
+```
+
+## 🛠️ Usage
+
+### **Web Interface**
+1. Adjust sliders for demand (riders) and supply (drivers)
+2. Select vehicle type and expected duration
+3. Choose between manual input or auto-estimation for base price
+4. View real-time price recommendations
+
+### **Programmatic Usage**
+```python
+from src.base_price import estimate_base_price
+from src.rl import train_q_agent, DynamicPricingEnv
+from src.preprocessing import load_data, preprocess
+
+# Load and preprocess data
+df = load_data("data/dynamic_pricing.csv")
+processed_df = preprocess(df)
+
+# Train RL agent
+env = DynamicPricingEnv(processed_df)
+agent = train_q_agent(env, episodes=25)
+
+# Get price recommendation
+base_price = estimate_base_price(df, "Premium", 30)
+multiplier = agent.get_best_action(state)
+final_price = base_price * multiplier
+```
+
+## 📋 Dependencies
+
+- **streamlit** ≥ 1.33 - Web application framework
+- **pandas** ≥ 2.0 - Data manipulation and analysis
+- **numpy** ≥ 1.24 - Numerical computing
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with ❤️ using Python, Streamlit, and Reinforcement Learning
+- Inspired by modern ride-sharing pricing strategies
+- Special thanks to the open-source community
+
+---
+
+<div align="center">
+
+**⭐ Star this repository if you found it helpful!**
+
+[🔝 Back to Top](#-smart-dynamic-pricing-system)
+
+</div>
