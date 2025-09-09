@@ -63,7 +63,7 @@ The system adaptively adjusts ride prices based on demand, supply, vehicle type,
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/dynamic-pricing-strategy.git
+   git clone https://github.com/DivyanshGupta-16/Smart_Dynamic_Pricing.git
    cd dynamic-pricing-strategy
    ```
 
